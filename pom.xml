@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>br.com.objectos</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>way-secshell</artifactId>
+	<name>objectos :: way :: secure shell</name>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>A thin wrapper around the JSch library.</description>
+	<url>https://github.com/objectos/way-secshell</url>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git://objectos/way-secshell.git</connection>
+		<developerConnection>scm:git:git@github.com:objectos/way-secshell.git</developerConnection>
+		<url>https://github.com/objectos/way-secshell</url>
+	</scm>
+	<developers>
+		<developer>
+			<id>moe</id>
+			<name>Marcio Endo</name>
+			<email>marcio.endo@objectos.com.br</email>
+		</developer>
+	</developers>
+	<properties>
+		<br.com.objectos.way-base.version>1.5-SNAPSHOT</br.com.objectos.way-base.version>
+		<com.jcraft.agentproxy.version>0.0.7</com.jcraft.agentproxy.version>
+		<com.jcraft.jsch.version>0.1.50</com.jcraft.jsch.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>way-base</artifactId>
+			<version>${br.com.objectos.way-base.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>${com.jcraft.jsch.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch.agentproxy.connector-factory</artifactId>
+			<version>${com.jcraft.agentproxy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch.agentproxy.jsch</artifactId>
+			<version>${com.jcraft.agentproxy.version}</version>
+		</dependency>
+	</dependencies>
+</project>
