@@ -42,6 +42,13 @@
 			<version>${br.com.objectos.way-base.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>br.com.objectos</groupId>
+			<artifactId>way-base</artifactId>
+			<version>${br.com.objectos.way-base.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.jcraft</groupId>
 			<artifactId>jsch</artifactId>
 			<version>${com.jcraft.jsch.version}</version>

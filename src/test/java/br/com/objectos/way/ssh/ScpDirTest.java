@@ -50,8 +50,8 @@ public class ScpDirTest {
 
     if (dir.exists()) {
       Directories.rm_rf(dir);
-      dir.mkdir();
     }
+    dir.mkdir();
 
     file0 = new File(dir, "file0.txt");
     Files.write("whatever 0", file0, Charsets.UTF_8);
@@ -64,8 +64,8 @@ public class ScpDirTest {
     scpres = new File(tmp, "scpres");
     if (scpres.exists()) {
       Directories.rm_rf(scpres);
-      scpres.mkdir();
     }
+    scpres.mkdir();
   }
 
   public void file() {
