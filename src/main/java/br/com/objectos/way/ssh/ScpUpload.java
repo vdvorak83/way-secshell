@@ -20,7 +20,7 @@ import java.io.File;
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-class ScpUpload {
+public class ScpUpload {
 
   private final File file;
 
@@ -28,7 +28,7 @@ class ScpUpload {
 
   private String dest = "";
 
-  public ScpUpload(File file) {
+  ScpUpload(File file) {
     this.file = file;
   }
 
