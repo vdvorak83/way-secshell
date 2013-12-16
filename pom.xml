@@ -31,7 +31,7 @@
 		</developer>
 	</developers>
 	<properties>
-		<br.com.objectos.way-base.version>1.5-SNAPSHOT</br.com.objectos.way-base.version>
+		<br.com.objectos.way-base.version>1.5</br.com.objectos.way-base.version>
 		<com.jcraft.agentproxy.version>0.0.7</com.jcraft.agentproxy.version>
 		<com.jcraft.jsch.version>0.1.50</com.jcraft.jsch.version>
 	</properties>
