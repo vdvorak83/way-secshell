@@ -31,6 +31,7 @@ public class WaySSHBuilder {
 
   static {
     JSch.setConfig("PreferredAuthentications", "publickey");
+    JSch.setConfig("StrictHostKeyChecking", "no");
     JSch.setLogger(WaySSHLogger.INSTANCE);
   }
 
