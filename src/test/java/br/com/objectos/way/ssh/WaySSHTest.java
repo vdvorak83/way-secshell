@@ -15,13 +15,19 @@
  */
 package br.com.objectos.way.ssh;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.fail;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import com.google.common.base.Charsets;
 
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
@@ -52,6 +58,16 @@ public class WaySSHTest {
       }
       fail();
     }
+  }
+
+  public void exec() {
+    String cmd = new String("a,b,c");
+    byte[] bytes = cmd.getBytes(Charsets.ISO_8859_1);
+    InputStream in = new ByteArrayInputStream(bytes);
+
+    RemoteCommand res = ssh.execute("cut -d',' -f2", in);
+    List<String> stdout = res.stdout();
+    assertThat(stdout.get(0), equalTo("b"));
   }
 
 }

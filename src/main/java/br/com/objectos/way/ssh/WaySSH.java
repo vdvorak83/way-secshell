@@ -16,6 +16,7 @@
 package br.com.objectos.way.ssh;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
@@ -56,6 +57,8 @@ public abstract class WaySSH {
   public void disconnect() {
   }
 
+  public abstract RemoteCommand execute(String cmd, InputStream in);
+
   abstract ScpUploadChannel uploadChannelOf(File file, String dest);
 
   private static class Success extends WaySSH {
@@ -77,6 +80,12 @@ public abstract class WaySSH {
     }
 
     @Override
+    public RemoteCommand execute(String command, InputStream in) {
+      CommandChannel channel = new CommandChannelBuilder(session, command, in).build();
+      return channel.exec();
+    }
+
+    @Override
     ScpUploadChannel uploadChannelOf(File file, String dest) {
       return ScpUploadChannel.success(session, file, dest);
     }
@@ -94,6 +103,11 @@ public abstract class WaySSH {
     @Override
     public List<Exception> getExceptions() {
       return exceptions;
+    }
+
+    @Override
+    public RemoteCommand execute(String cmd, InputStream in) {
+      return RemoteCommand.failed(exceptions);
     }
 
     @Override
