@@ -57,6 +57,10 @@ public abstract class WaySSH {
   public void disconnect() {
   }
 
+  public RemoteCommand execute(String cmd) {
+    return execute(cmd, null);
+  }
+
   public abstract RemoteCommand execute(String cmd, InputStream in);
 
   abstract ScpUploadChannel uploadChannelOf(File file, String dest);

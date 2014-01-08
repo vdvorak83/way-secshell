@@ -61,6 +61,12 @@ public class WaySSHTest {
   }
 
   public void exec() {
+    RemoteCommand res = ssh.execute("echo 'Hello world!'");
+    List<String> stdout = res.stdout();
+    assertThat(stdout.get(0), equalTo("Hello world!"));
+  }
+
+  public void exec_pipe() {
     String cmd = new String("a,b,c");
     byte[] bytes = cmd.getBytes(Charsets.ISO_8859_1);
     InputStream in = new ByteArrayInputStream(bytes);
