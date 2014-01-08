@@ -46,11 +46,13 @@ class ScpUploadConnectSuccessDir extends ScpUploadConnectSuccess {
     }
 
     File[] files = dir.listFiles();
-    for (File file : files) {
-      if (file.isDirectory()) {
-        sendDir(file);
-      } else {
-        sendFile(file);
+    if (files != null) {
+      for (File file : files) {
+        if (file.isDirectory()) {
+          sendDir(file);
+        } else {
+          sendFile(file);
+        }
       }
     }
 

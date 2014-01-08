@@ -39,10 +39,10 @@ public class WaySSHTest {
 
   @BeforeClass
   public void setUp() {
-    ssh = WaySSH.connect()
+    ssh = WaySSH.ssh()
         .toHost("localhost")
         .atPort(22)
-        .get();
+        .connect();
   }
 
   @AfterClass(alwaysRun = true)
@@ -66,12 +66,18 @@ public class WaySSHTest {
     assertThat(stdout.get(0), equalTo("Hello world!"));
   }
 
-  public void exec_pipe() {
+  public void exec_args() {
+    RemoteCommand res = ssh.execute("echo 'Hello %s'", "with args");
+    List<String> stdout = res.stdout();
+    assertThat(stdout.get(0), equalTo("Hello with args"));
+  }
+
+  public void read_exec() {
     String cmd = new String("a,b,c");
     byte[] bytes = cmd.getBytes(Charsets.ISO_8859_1);
     InputStream in = new ByteArrayInputStream(bytes);
 
-    RemoteCommand res = ssh.execute("cut -d',' -f2", in);
+    RemoteCommand res = ssh.read(in).andExecute("cut -d',' -f2");
     List<String> stdout = res.stdout();
     assertThat(stdout.get(0), equalTo("b"));
   }

@@ -43,9 +43,9 @@ public class ScpUpload {
   }
 
   public Scp send() {
-    return WaySSH.connect()
+    return WaySSH.ssh()
         .toHost(host)
-        .get()
+        .connect()
 
         .uploadChannelOf(file, dest)
         .connect()

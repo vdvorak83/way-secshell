@@ -17,7 +17,8 @@ class CommandChannelFailed extends CommandChannel {
 
   private final List<Exception> exceptions;
 
-  public CommandChannelFailed(Exception e) {
+  public CommandChannelFailed(WaySSH ssh, Exception e) {
+    super(ssh);
     this.exceptions = ImmutableList.of(e);
   }
 
@@ -28,7 +29,7 @@ class CommandChannelFailed extends CommandChannel {
 
   @Override
   RemoteCommand exec() {
-    return RemoteCommand.failed(exceptions);
+    return RemoteCommand.failed(ssh, exceptions);
   }
 
 }
