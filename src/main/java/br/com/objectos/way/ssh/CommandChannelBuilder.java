@@ -18,13 +18,16 @@ import com.jcraft.jsch.Session;
  */
 class CommandChannelBuilder {
 
+  private final WaySSH ssh;
+
   private final Session session;
 
   private final String command;
 
   private final InputStream in;
 
-  public CommandChannelBuilder(Session session, String command, InputStream in) {
+  public CommandChannelBuilder(WaySSH ssh, Session session, String command, InputStream in) {
+    this.ssh = ssh;
     this.session = session;
     this.command = command;
     this.in = in;
@@ -35,10 +38,10 @@ class CommandChannelBuilder {
       Channel channel = session.openChannel("exec");
       ((ChannelExec) channel).setCommand(command);
       channel.setInputStream(in);
-      return new CommandChannelSuccess(channel);
+      return new CommandChannelSuccess(ssh, channel);
 
     } catch (JSchException e) {
-      return new CommandChannelFailed(e);
+      return new CommandChannelFailed(ssh, e);
 
     }
   }

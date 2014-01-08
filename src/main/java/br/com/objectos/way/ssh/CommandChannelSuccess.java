@@ -17,7 +17,8 @@ class CommandChannelSuccess extends CommandChannel {
 
   private final Channel channel;
 
-  public CommandChannelSuccess(Channel channel) {
+  public CommandChannelSuccess(WaySSH ssh, Channel channel) {
+    super(ssh);
     this.channel = channel;
   }
 
@@ -33,11 +34,11 @@ class CommandChannelSuccess extends CommandChannel {
 
       List<String> stdout = reader.readLines();
 
-      return RemoteCommand.success(stdout);
+      return RemoteCommand.success(ssh, stdout);
 
     } catch (Exception e) {
 
-      return RemoteCommand.failed(this, e);
+      return RemoteCommand.failed(ssh, this, e);
 
     }
   }

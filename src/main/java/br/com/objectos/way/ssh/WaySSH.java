@@ -30,8 +30,8 @@ public abstract class WaySSH {
   WaySSH() {
   }
 
-  public static WaySSHBuilder connect() {
-    return new WaySSHBuilder();
+  public static SshBuilder ssh() {
+    return new SSHBuilderPojo();
   }
 
   public static ScpBuilder scp() {
@@ -57,11 +57,20 @@ public abstract class WaySSH {
   public void disconnect() {
   }
 
-  public RemoteCommand execute(String cmd) {
-    return execute(cmd, null);
+  public RemoteCommand execute(String command) {
+    return new ReadBuilder(this).andExecute(command);
   }
 
-  public abstract RemoteCommand execute(String cmd, InputStream in);
+  public RemoteCommand execute(String template, Object... args) {
+    String command = String.format(template, args);
+    return execute(command);
+  }
+
+  public ReadBuilder read(InputStream in) {
+    return new ReadBuilder(this, in);
+  }
+
+  abstract RemoteCommand executeCommand(String cmd, InputStream in);
 
   abstract ScpUploadChannel uploadChannelOf(File file, String dest);
 
@@ -84,8 +93,8 @@ public abstract class WaySSH {
     }
 
     @Override
-    public RemoteCommand execute(String command, InputStream in) {
-      CommandChannel channel = new CommandChannelBuilder(session, command, in).build();
+    public RemoteCommand executeCommand(String command, InputStream in) {
+      CommandChannel channel = new CommandChannelBuilder(this, session, command, in).build();
       return channel.exec();
     }
 
@@ -110,8 +119,8 @@ public abstract class WaySSH {
     }
 
     @Override
-    public RemoteCommand execute(String cmd, InputStream in) {
-      return RemoteCommand.failed(exceptions);
+    public RemoteCommand executeCommand(String cmd, InputStream in) {
+      return RemoteCommand.failed(this, exceptions);
     }
 
     @Override

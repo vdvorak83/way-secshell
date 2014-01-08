@@ -17,6 +17,12 @@ import com.google.common.collect.ImmutableList;
  */
 abstract class CommandChannel implements HasStdout {
 
+  final WaySSH ssh;
+
+  public CommandChannel(WaySSH ssh) {
+    this.ssh = ssh;
+  }
+
   @Override
   public List<Exception> getExceptions() {
     return ImmutableList.of();

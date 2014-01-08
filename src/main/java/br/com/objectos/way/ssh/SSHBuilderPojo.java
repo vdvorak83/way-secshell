@@ -27,7 +27,11 @@ import com.jcraft.jsch.agentproxy.RemoteIdentityRepository;
 /**
  * @author marcio.endo@objectos.com.br (Marcio Endo)
  */
-public class WaySSHBuilder {
+class SSHBuilderPojo
+    implements
+    SshBuilder,
+    SshBuilder.HostBuider,
+    SshBuilder.PortBuilder {
 
   static {
     JSch.setConfig("PreferredAuthentications", "publickey");
@@ -43,25 +47,26 @@ public class WaySSHBuilder {
 
   private String knownHosts;
 
-  WaySSHBuilder() {
-  }
-
-  public WaySSHBuilder asUser(String user) {
-    this.user = user;
-    return this;
-  }
-
-  public WaySSHBuilder toHost(String host) {
+  @Override
+  public HostBuider toHost(String host) {
     this.host = host;
     return this;
   }
 
-  public WaySSHBuilder atPort(int port) {
+  @Override
+  public PortBuilder atPort(int port) {
     this.port = port;
     return this;
   }
 
-  public WaySSH get() {
+  @Override
+  public ConnectBuilder asUser(String user) {
+    this.user = user;
+    return this;
+  }
+
+  @Override
+  public WaySSH connect() {
     try {
       JSch sch = new JSch();
 
