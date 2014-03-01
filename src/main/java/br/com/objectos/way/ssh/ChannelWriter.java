@@ -65,6 +65,7 @@ class ChannelWriter implements HasStdout {
 
     Files.copy(src, out);
 
+    out.flush();
     out.write(0);
     out.flush();
   }
