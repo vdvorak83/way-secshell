@@ -31,7 +31,7 @@
 		</developer>
 	</developers>
 	<properties>
-		<com.jcraft.agentproxy.version>0.0.7</com.jcraft.agentproxy.version>
+		<com.jcraft.agentproxy.version>0.0.9</com.jcraft.agentproxy.version>
 		<com.jcraft.jsch.version>0.1.50</com.jcraft.jsch.version>
 	</properties>
 	<profiles>
